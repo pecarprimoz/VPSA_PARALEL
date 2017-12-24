@@ -17,7 +17,7 @@ static inline void poracunajVsote(int h, int w, __global int* slikaInput) {
 		for(int j = 0; j < num_groups; j++){
 		//gremo po celotni vrstici
 			//trenutna pozicija glede na širino in stolpec v katerem smo plus trenutni indeks 
-			int trenutna_pozicija_v_vektorju = (w*i) + j + (get_global_id(0)*num_groups);
+			int trenutna_pozicija_v_vektorju = (w/4*i) + j + (get_global_id(0)*num_groups);
 			int trenutna_vrednost_v_vektorju = slikaInput[trenutna_pozicija_v_vektorju];
 			//ROBNI PRIMER 1, CE SEM NA ZACETKU NE PREVERJAM LEVEGA
 			if (j == 0) {
@@ -117,64 +117,11 @@ void poisciSive(int h, int w, __global int* slikaInput, __global int* slikaInput
 }
 
 
-__kernel void seamCarving(__global int *slikaInputOriginal, int OriginalW, int OriginalH,
-						  __global int *slikaKoncna, int KoncnaW, int KoncnaH,
-						  __global int *slikaInput, int InputW, int InputH, int MAXITER)
+__kernel void seamCarving(__global int *slikaInput, int InputW, int InputH)
 {
 	//Število iteracij je definirano v DEFINE
-		//Višina in širina slike
-		int cntW = 0;
-		
-		while (cntW < MAXITER) {
-			int w = InputW;
+	//Višina in širina slike
+		int w = InputW;
 		int h = InputH;
-			poracunajVsote(h, w, slikaInput);
-			poisciSive(h, w, slikaInput, slikaInputOriginal);
-
-			KoncnaW = OriginalW - 1;
-			KoncnaH = OriginalH;
-			//Fun fact, èe sem imel for od 0 do velikosti slike, jo je izrisalo obratno, èe to delam obratno je pravilno
-			int cnt = KoncnaW*KoncnaH;
-			for (int i = InputW*InputH; i>0; i--) {
-				if (slikaInputOriginal[i] != -1) {
-					slikaKoncna[cnt] = slikaInputOriginal[i];
-					cnt--;
-				}
-			}
-			//Posodobim slikaInputOriginal, ki mi hrani vrednosti za rezanje
-			OriginalH = KoncnaH;
-			OriginalW = KoncnaW;
-			for (int i = 0; i<KoncnaW*KoncnaH; i++) {
-				slikaInputOriginal[i] = slikaKoncna[i];
-			}
-
-			//memcpy(slikaInputOriginal, slikaKoncna, KoncnaW*KoncnaH * sizeof(int));
-
-			//Posodobim slikaInput, ki mi hrani vsote
-			InputH = KoncnaH;
-			InputW = KoncnaW;
-			for (int i = 0; i<KoncnaW*KoncnaH; i++) {
-				slikaInput[i] = slikaKoncna[i];
-			}
-
-			cntW++;
-		}
-		//slikaKoncna[0]=slikaInput[0];
-		
-		
-		//Testiranje ene iteracije izvajanje postopka
-		
-		//Sedaj imamo v slikaInput poraèunane vse vsote, gremo gledati minimum
-
-		
-		/*
-		//Sedaj imamo postavljene vrednosti na -1, tam kjer smo imeli najmanše vsote, te bomo izrezali
-
-		//Width-1, ker režemo po širini
-		
-		//memcpy(slikaInput, slikaKoncna, KoncnaW*KoncnaH * sizeof(int));
-		//Poveèam št. iteracij
-		*/
-		
-
+		poracunajVsote(h, w, slikaInput);
 }
