@@ -1,5 +1,5 @@
 ﻿  VPSA_SEMINARSKA_PARALEL.cpp
-c:\users\primoz-windowsi\source\repos\vpsa_seminarska_paralel\vpsa_seminarska_paralel\vpsa_seminarska_paralel.cpp(339): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+c:\users\primoz-windowsi\source\repos\vpsa_seminarska_paralel\vpsa_seminarska_paralel\vpsa_seminarska_paralel.cpp(265): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
   ForDebug.cpp
 c:\users\primoz-windowsi\source\repos\vpsa_seminarska_paralel\vpsa_seminarska_paralel\fordebug.cpp(1): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
   Generating Code...
