@@ -1,6 +1,7 @@
 ﻿  VPSA_SEMINARSKA_PARALEL.cpp
-c:\users\primoz-windowsi\source\repos\vpsa_seminarska_paralel\vpsa_seminarska_paralel\vpsa_seminarska_paralel.cpp(69): warning C4101: 'buf_len': unreferenced local variable
-c:\users\primoz-windowsi\source\repos\vpsa_seminarska_paralel\vpsa_seminarska_paralel\vpsa_seminarska_paralel.cpp(68): warning C4101: 'buf': unreferenced local variable
-c:\users\primoz-windowsi\source\repos\vpsa_seminarska_paralel\vpsa_seminarska_paralel\vpsa_seminarska_paralel.cpp(43): warning C4101: 'i': unreferenced local variable
-c:\users\primoz-windowsi\source\repos\vpsa_seminarska_paralel\vpsa_seminarska_paralel\vpsa_seminarska_paralel.cpp(42): warning C4101: 'ch': unreferenced local variable
+c:\users\primoz-windowsi\source\repos\vpsa_seminarska_paralel\vpsa_seminarska_paralel\vpsa_seminarska_paralel.cpp(92): warning C4838: conversion from 'int' to '::size_t' requires a narrowing conversion
+c:\users\primoz-windowsi\source\repos\vpsa_seminarska_paralel\vpsa_seminarska_paralel\vpsa_seminarska_paralel.cpp(66): warning C4101: 'buf_len': unreferenced local variable
+c:\users\primoz-windowsi\source\repos\vpsa_seminarska_paralel\vpsa_seminarska_paralel\vpsa_seminarska_paralel.cpp(65): warning C4101: 'buf': unreferenced local variable
+c:\users\primoz-windowsi\source\repos\vpsa_seminarska_paralel\vpsa_seminarska_paralel\vpsa_seminarska_paralel.cpp(40): warning C4101: 'i': unreferenced local variable
+c:\users\primoz-windowsi\source\repos\vpsa_seminarska_paralel\vpsa_seminarska_paralel\vpsa_seminarska_paralel.cpp(39): warning C4101: 'ch': unreferenced local variable
   VPSA_SEMINARSKA_PARALEL.vcxproj -> C:\Users\primoz-windowsi\source\repos\VPSA_SEMINARSKA_PARALEL\Debug\VPSA_SEMINARSKA_PARALEL.exe
