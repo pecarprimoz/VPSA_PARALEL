@@ -240,14 +240,11 @@ static inline void poisciSive(int h, int w, __global int* slikaInput, __global i
 		}
 
 		if (indeks_najmanjse_vrednosti_v_vrstici + 1 < w) {
-			leviElement = slikaInput[indeksNaslednjeVrstice + 1];
+			desniElement = slikaInput[indeksNaslednjeVrstice + 1];
 		}
+		indeks_najmanjse_vrednosti_v_vrstici += leviElement < elementNaslednjeVrstice
+			? (leviElement < desniElement ? -1 : 1) : (elementNaslednjeVrstice < desniElement ? 0 : 1);
 
-		if (leviElement < elementNaslednjeVrstice)
-			if (leviElement < desniElement)
-				indeks_najmanjse_vrednosti_v_vrstici--;
-			else
-				indeks_najmanjse_vrednosti_v_vrstici++;
 		siv[siv_c] = indeks_najmanjse_vrednosti_v_vrstici;
 		leviElement = desniElement = elementNaslednjeVrstice = INT_MAX;
 		siv_c++;
