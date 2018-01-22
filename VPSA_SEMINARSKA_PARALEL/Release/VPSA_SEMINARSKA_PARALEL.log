@@ -1,0 +1,12 @@
+﻿  VPSA_SEMINARSKA_PARALEL.cpp
+VPSA_SEMINARSKA_PARALEL.cpp(91): warning C4838: conversion from 'int' to '::size_t' requires a narrowing conversion
+VPSA_SEMINARSKA_PARALEL.cpp(65): warning C4101: 'buf_len': unreferenced local variable
+VPSA_SEMINARSKA_PARALEL.cpp(64): warning C4101: 'buf': unreferenced local variable
+VPSA_SEMINARSKA_PARALEL.cpp(39): warning C4101: 'i': unreferenced local variable
+VPSA_SEMINARSKA_PARALEL.cpp(38): warning C4101: 'ch': unreferenced local variable
+  Generating code
+  2 of 12 functions (16.7%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  VPSA_SEMINARSKA_PARALEL.vcxproj -> C:\Users\primoz-windowsi\source\repos\VPSA_SEMINARSKA_PARALEL\Release\VPSA_SEMINARSKA_PARALEL.exe

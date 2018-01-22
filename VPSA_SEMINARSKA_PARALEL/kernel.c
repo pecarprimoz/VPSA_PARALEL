@@ -1,6 +1,4 @@
 #define NUM_THREADS 512
-int return_global_id(int x, int y, int width);
-
 static inline int returnMinimumValue(int a, int b, int c);
 static inline void poisciSive(int h, int w, __global int* slikaInput, __global int* siv);
 static inline int returnMinimumValue(int a, int b, int c){
@@ -175,9 +173,9 @@ __kernel void sobelGPU(
 {
 	int Gx, Gy, tempPixel;
 
-	int shared_size = 4 * 4;
+	int shared_size = 22 * 22;
 
-	__local int shared[4 * 4];
+	__local int shared[22 * 22];
 
 	//trenutne globalne koordinate od niti
 	int x = get_global_id(0);
@@ -232,7 +230,7 @@ static inline void poisciSive(int h, int w, __global int* slikaInput, __global i
 	int desniElement;
 	while (siv_c < h) {
 		//Gledamo 3 primere, levi desni in srednji
-		int indeksNaslednjeVrstice = return_global_id(indeks_najmanjse_vrednosti_v_vrstici, siv_c, w);
+		int indeksNaslednjeVrstice = siv_c * w + indeks_najmanjse_vrednosti_v_vrstici;
 		int elementNaslednjeVrstice = slikaInput[indeksNaslednjeVrstice];
 
 		if (indeks_najmanjse_vrednosti_v_vrstici - 1 >= 0) {
@@ -242,14 +240,23 @@ static inline void poisciSive(int h, int w, __global int* slikaInput, __global i
 		if (indeks_najmanjse_vrednosti_v_vrstici + 1 < w) {
 			desniElement = slikaInput[indeksNaslednjeVrstice + 1];
 		}
-		indeks_najmanjse_vrednosti_v_vrstici += leviElement < elementNaslednjeVrstice
-			? (leviElement < desniElement ? -1 : 1) : (elementNaslednjeVrstice < desniElement ? 0 : 1);
-
+		if (leviElement < elementNaslednjeVrstice) {
+			if (leviElement < desniElement) {
+				indeks_najmanjse_vrednosti_v_vrstici--;
+			}
+			else {
+				indeks_najmanjse_vrednosti_v_vrstici++;
+			}
+		}
+		else {
+			if (elementNaslednjeVrstice > desniElement) {
+				indeks_najmanjse_vrednosti_v_vrstici++;
+			}
+		}
 		siv[siv_c] = indeks_najmanjse_vrednosti_v_vrstici;
 		leviElement = desniElement = elementNaslednjeVrstice = INT_MAX;
 		siv_c++;
 	}
-
 }
 
 __kernel void odstraniSiv(
@@ -265,14 +272,10 @@ __kernel void odstraniSiv(
 
 	int koncniIndeks;
 	if (curX < width && curY < height) {
-		koncniIndeks = return_global_id(curX, curY, width);
-		//v vsaki vrstici preskočim en piksel
+		koncniIndeks = curY * width + curX;
 		if (curX >= siv[curY]) {
 			tmpX++;
 		}
-		outputSlika[koncniIndeks] = inputSlika[return_global_id(tmpX, curY, width + 1)];
+		outputSlika[koncniIndeks] = inputSlika[curY * (width+1) + tmpX];
 	}
-}
-int return_global_id(int x, int y, int width) {
-	return y * width + x;
 }
